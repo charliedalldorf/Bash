@@ -1,0 +1,56 @@
+---
+- hosts: fedora
+  tasks:
+  
+    - name: Vivaldi Setup
+      shell: dnf config-manager --add-repo https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+      become: true
+
+    - name: Jenkins Setup
+      shell:  |
+        wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+        rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+      become: true
+
+    # - name: VMWare Setup
+    #   shell: |
+    #     ln -s /usr/lib64/libudev.so.1 /usr/lib64/libudev.so.0
+    #     ln -s /usr/lib64/libffi.so.6 /usr/lib64/libffi.so.5
+    #   become: true   
+
+    - name: Install Themes and Other Tools - Setup
+      dnf: 
+        name:
+          - arc-theme
+          - papirus-icon-theme
+          - ansible
+          - wget 
+          - unzip
+          - dnf-utils
+          - vim
+
+          - vivaldi-stable
+
+          - jenkins
+
+          - rdesktop
+          - libXScrnSaver
+          - libpng12
+
+          - bzip2
+          - curl
+          - htop
+          - git
+          - glances
+          - mlocate
+          - ntp
+          - pydf
+          - rsyslog
+          - vim-enhanced
+          - wget
+          - unzip
+          - zip
+
+
+        state: latest
+      become: true     
